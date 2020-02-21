@@ -1,14 +1,12 @@
 #include <iostream>
 using namespace std;
 int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
-int normalMenu = 1;
 //Muestra una lista de opciones a elegir para el usuario
 void optionsList(){
     cout << "1.- Ver menu y ordenar" << endl;
-    cout << "2.- Reservar mesa especial" << endl;
-    cout << "3.- Pagar" << endl;
-    cout << "4.- Dejar un comentario" << endl;
-    cout << "5.- Salir del programa" << endl; 
+    cout << "2.- Pagar" << endl;
+    cout << "3.- Dejar un comentario" << endl;
+    cout << "4.- Salir del programa" << endl; 
 }
 
 /* displayMenu muestra al usuario su el menu, el array foodName[] contiene el nombre de la comida
@@ -20,12 +18,7 @@ void displayMenu(){
     string foodName[6] = {"Tacos", "Empanadas", "Tortas", "Picaditas", "Agua", "Refresco"}; 
     int i = 0, maxFood = 6;
     for(i = 0; i < maxFood; i++){
-        if(normalMenu){
-            cout << foodName[i] << "...................." << "$" << foodPrice[i] << endl; 
-        }
-        else{
-            cout << i + 1 << ".- " << foodName[i] << "............." << "$" << foodPrice[i] << endl;
-        }
+        cout << i + 1 << ".- " << foodName[i] << "............." << "$" << foodPrice[i] << endl;
     }
 }
 /* Calcula la cuenta de lo que compor el cliente, se hace display de un menu especial
@@ -35,7 +28,6 @@ void displayMenu(){
 double total(){
     int food = 1, amount;
     double bill;
-    normalMenu = 0;
     while (food != 0){
         cout << "Ingrese el numero de lo que desea llevar" << endl;
         displayMenu();
@@ -93,7 +85,7 @@ void payMethod( double bill){
 int main(){
     double bill;
     int option = 0;
-    const int exit = 5;
+    const int exit = 4;
     cout << "Bienvenido por favor escoja una opcion" << endl;
     do{
         optionsList();
@@ -103,19 +95,16 @@ int main(){
             bill = total();
             break;
         case 2:
-            //TODO: function reservar lugar
-            break;
-        case 3:
             payMethod(bill);
             break;
-        case 4:
+        case 3:
             //TODO: function leave a comment
             break;
-        case 5:
+        case 4:
             cout << "Gracias por su preferencia" << endl;
             break;
         default:
-            cout << "Escoja una opcion entre 1 y 5";
+            cout << "Escoja una opcion entre 1 y 5" << endl;
             break;
         }
     }
