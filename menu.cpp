@@ -4,7 +4,7 @@ int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
 int normalMenu = 1;
 //Muestra una lista de opciones a elegir para el usuario
 void optionsList(){
-    cout << "1.- Ver menu" << endl;
+    cout << "1.- Ver menu y ordenar" << endl;
     cout << "2.- Reservar mesa especial" << endl;
     cout << "3.- Pagar" << endl;
     cout << "4.- Dejar un comentario" << endl;
@@ -37,7 +37,7 @@ double total(){
     double bill;
     normalMenu = 0;
     while (food != 0){
-        cout << "¿Que ordeno?" << endl;
+        cout << "Ingrese el numero de lo que desea llevar" << endl;
         displayMenu();
         cout << "Ingrese 0 para salir" << endl;
         cin >> food;
@@ -53,6 +53,7 @@ double total(){
             cout << "Escoge una comida del 1 al 6" << endl;
         }
     }
+    cout << "Orden tomada" << endl;
     return bill;
 }
 
@@ -62,11 +63,9 @@ double total(){
     2 pagar en efectivo, dependiendo de la opcion se solicita insertar la tarjeta/efectivo
     y se hace la resta con la cuenta, en este caso solo con el efectivo */
 
-void payMethod(){
+void payMethod( double bill){
     int method;
-    double bill;
     char money, creditCard;
-    bill = total();
     cout << "La cuenta es $" << bill << endl;
     cout << "Elija su metodo de pago" << endl << "1.-Tarjeta de credito" << endl << "2.-Efectivo" << endl;
     cin >> method;
@@ -78,7 +77,7 @@ void payMethod(){
             cout << "transaccion completada" << endl;
         }
         else{
-            cout << "transaccion" << endl;
+            cout << "transaccion fallida" << endl;
         }
         break;
     case 2:
@@ -90,12 +89,9 @@ void payMethod(){
     }
 }
 
-void bookSeat(){
-    cout << "Inserte el dia" << endl;
-    //TODO: terminar este procedimientos
-}
 
 int main(){
+    double bill;
     int option = 0;
     const int exit = 5;
     cout << "Bienvenido por favor escoja una opcion" << endl;
@@ -104,13 +100,13 @@ int main(){
         cin >> option;
         switch (option){
         case 1:
-            displayMenu();
+            bill = total();
             break;
         case 2:
             //TODO: function reservar lugar
             break;
         case 3:
-            payMethod();
+            payMethod(bill);
             break;
         case 4:
             //TODO: function leave a comment
