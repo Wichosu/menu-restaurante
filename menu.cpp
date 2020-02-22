@@ -5,8 +5,7 @@ int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
 void optionsList(){
     cout << "1.- Ver menu y ordenar" << endl;
     cout << "2.- Pagar" << endl;
-    cout << "3.- Dejar un comentario" << endl;
-    cout << "4.- Salir del programa" << endl; 
+    cout << "3.- Salir del programa" << endl; 
 }
 
 /* displayMenu muestra al usuario su el menu, el array foodName[] contiene el nombre de la comida
@@ -49,43 +48,31 @@ double total(){
     return bill;
 }
 
-/* TODO: aniadir cuenta y mostrarla a la hora de selecionar la opcion de pagar.
-   TODO: Dar cambio.
+/* 
     el procedimiento deja al usuario escoger dos opciones 1 pagar con tarjeta y 
     2 pagar en efectivo, dependiendo de la opcion se solicita insertar la tarjeta/efectivo
     y se hace la resta con la cuenta, en este caso solo con el efectivo */
 
 void payMethod( double bill){
-    int method;
-    char money, creditCard;
+    double money, exchange;
     cout << "La cuenta es $" << bill << endl;
-    cout << "Elija su metodo de pago" << endl << "1.-Tarjeta de credito" << endl << "2.-Efectivo" << endl;
-    cin >> method;
-    switch (method){
-    case 1:
-        cout << "Ingrese su tarjeta" << endl;
-        cin >> creditCard;
-        if (creditCard == 'y'){
-            cout << "transaccion completada" << endl;
-        }
-        else{
-            cout << "transaccion fallida" << endl;
-        }
-        break;
-    case 2:
-        cout << "Ingrese su efectivo" << endl;
+    cout << "Porfavor ingrese el efectivo" << endl;
+    cin >> money;
+    exchange = money - bill;
+    while(exchange < 0){
+        cout << "Por favor ingrese el dinero restante" << endl;
+        cout << "Faltan $" << abs(exchange) << endl;
         cin >> money;
-        break;
-    default:
-        break;
+        exchange = money - abs(exchange);
     }
+    cout << "Su cambio es " << exchange << " Gracias por su compra" << endl;
 }
 
 
 int main(){
     double bill;
     int option = 0;
-    const int exit = 4;
+    const int exit = 3;
     cout << "Bienvenido por favor escoja una opcion" << endl;
     do{
         optionsList();
@@ -98,9 +85,6 @@ int main(){
             payMethod(bill);
             break;
         case 3:
-            //TODO: function leave a comment
-            break;
-        case 4:
             cout << "Gracias por su preferencia" << endl;
             break;
         default:
