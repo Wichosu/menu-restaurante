@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
+string foodName[6] = {"Tacos", "Empanadas", "Tortas", "Picaditas", "Agua", "Refresco"}; //nombre de la comida
 //Muestra una lista de opciones a elegir para el usuario
 void optionsList(){
     cout << "1.- Ver menu y ordenar" << endl;
@@ -14,8 +15,7 @@ void optionsList(){
     foodName[0] = "Tacos" y foodPrice[0] = "18", el index 0 de ambos arrays forman la oracion
     completa del producto y su precio respectivo*/
 
-void displayMenu(){
-    string foodName[6] = {"Tacos", "Empanadas", "Tortas", "Picaditas", "Agua", "Refresco"}; 
+void displayMenu(){ 
     int i = 0, maxFood = 6;
     for(i = 0; i < maxFood; i++){
         cout << i + 1 << ".- " << foodName[i] << "............." << "$" << foodPrice[i] << endl;
@@ -26,7 +26,10 @@ void displayMenu(){
     se obtiene multiplicando la cantidad por el precio de la comida (el numero se 
     sustituye por la cantidad del array)*/
 double total(){
-    int food = 1, amount;
+    int food = 1, i = 0, amount, maxi, order, error;
+    int countAmount[] = {};
+    string storeNames[] = {};
+    int foodOrders[] = {};
     double bill;
     while (food != 0){
         cout << "Ingrese el numero de lo que desea llevar" << endl;
@@ -39,13 +42,55 @@ double total(){
         else if(food > 0 && food < 7){
             cout << "¿Cantidad?" << endl;
             cin >> amount;
-            bill += (amount * foodPrice[food -1]);
+            storeNames[i] = foodName[food -1];
+            countAmount[i] = amount;
+            foodOrders[i] = foodPrice[food -1];
+            i++;
         }
         else{
             cout << "Escoge una comida del 1 al 6" << endl;
         }
     }
-    cout << "Orden tomada" << endl;
+    maxi = i;
+    do{
+        cout << "Serian" << endl;
+        for(i = 0; i <= maxi; i++){
+            cout << countAmount[i] << " " << storeNames[i] << endl;
+            bill += countAmount[i] * foodPrice[foodOrders[i]];
+        }
+        cout << "Es correcta la orden?" << endl << "1.- Si      2.-No" << endl;
+        cin >> order;
+        switch (order){
+        case 1:
+            break;
+        case 2:
+            do{
+                cout << "En que fallo la orden?" << endl;
+                for ( i = 0; i <= maxi; i++){
+                    cout << i + 1 << ".- " << countAmount[i] << " " << storeNames[i] << endl;
+                }
+                cin >> error;
+                if (error > 0 && error < 7){
+                    cout << "Que deseaba ordenar?" << endl;
+                    displayMenu();
+                    cin >> food;
+                    storeNames[error-1] = storeNames[food - 1];
+                    cout << "Cuanto deseaba ordenar?" << endl;
+                    cin >> amount;
+                    countAmount[error-1] = amount;
+                }
+                else{
+                    cout << "Escoge un numero de tu orden" << endl;
+                }
+            }
+            while(error < 1 && error > 6);
+            break;
+        default:
+            cout << "Presione 1 para salir" << endl;
+            break;
+        }
+    }
+    while(order != 1);
     return bill;
 }
 
@@ -93,6 +138,7 @@ int main(){
         switch (option){
         case 1:
             bill = total();
+            cout << bill << endl;
             break;
         case 2:
             payMethod(bill);
