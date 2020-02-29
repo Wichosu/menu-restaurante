@@ -9,7 +9,7 @@ void payMethod(double);
 int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
 
 int main(){
-    double bill;
+    double bill = 0.0;
     int option = 0;
     const int exit = 3;
     cout << "Bienvenido por favor escoja una opcion" << endl;
