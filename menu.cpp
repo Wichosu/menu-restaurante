@@ -26,9 +26,9 @@ void displayMenu(){
     sustituye por la cantidad del array)*/
 double total(){
     int food = 1, i = 0, amount, maxi, order, error;
-    int countAmount[] = {};
-    string storeNames[] = {};
-    int foodOrders[] = {};
+    int countAmount[10];
+    string storeNames[10];
+    int foodOrders[10];
     double bill;
     while (food != 0){
         cout << "Ingrese el numero de lo que desea llevar" << endl;
@@ -50,10 +50,10 @@ double total(){
             cout << "Escoge una comida del 1 al 6" << endl;
         }
     }
-    maxi = i;
     do{
+        maxi = i;
         cout << "Serian" << endl;
-        for(i = 0; i <= maxi; i++){
+        for(i = 0; i < maxi; i++){
             cout << countAmount[i] << " " << storeNames[i] << endl;
             bill += countAmount[i] * foodPrice[foodOrders[i]];
         }
@@ -65,7 +65,7 @@ double total(){
         case 2:
             do{
                 cout << "En que fallo la orden?" << endl;
-                for ( i = 0; i <= maxi; i++){
+                for ( i = 0; i < maxi; i++){
                     cout << i + 1 << ".- " << countAmount[i] << " " << storeNames[i] << endl;
                 }
                 cin >> error;
