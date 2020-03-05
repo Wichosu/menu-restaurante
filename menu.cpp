@@ -1,8 +1,41 @@
 #include <iostream>
 using namespace std;
+void optionsList();
+void displayMenu();
+double total();
+void payMethod(double);
+
 int foodPrice[6] = {18, 10, 15, 12, 8, 12}; //precios de la comida
 string foodName[6] = {"Tacos", "Empanadas", "Tortas", "Picaditas", "Agua", "Refrescos"}; //nombre de la comida
 //Muestra una lista de opciones a elegir para el usuario
+
+int main(){
+    double bill;
+    int option = 0;
+    const int exit = 3;
+    cout << "Bienvenido por favor escoja una opcion" << endl;
+    do{
+        optionsList();
+        cin >> option;
+        switch (option){
+        case 1:
+            bill = total();
+            break;
+        case 2:
+            payMethod(bill);
+            break;
+        case 3:
+            cout << "Gracias por su preferencia" << endl;
+            break;
+        default:
+            cout << "Escoja una opcion entre 1 y 5" << endl;
+            break;
+        }
+    }
+    while (option != exit);
+    return 0;
+}
+
 void optionsList(){
     cout << "1.- Ver menu y ordenar" << endl;
     cout << "2.- Pagar" << endl;
@@ -114,29 +147,3 @@ void payMethod( double bill){
 }
 
 
-int main(){
-    double bill;
-    int option = 0;
-    const int exit = 3;
-    cout << "Bienvenido por favor escoja una opcion" << endl;
-    do{
-        optionsList();
-        cin >> option;
-        switch (option){
-        case 1:
-            bill = total();
-            break;
-        case 2:
-            payMethod(bill);
-            break;
-        case 3:
-            cout << "Gracias por su preferencia" << endl;
-            break;
-        default:
-            cout << "Escoja una opcion entre 1 y 5" << endl;
-            break;
-        }
-    }
-    while (option != exit);
-    return 0;
-}
